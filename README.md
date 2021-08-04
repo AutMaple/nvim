@@ -1,6 +1,6 @@
 # nvim
 
-My vimrc for neovim
+My settings for neovim
 
 ## Usage
 
