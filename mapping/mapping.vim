@@ -12,10 +12,6 @@ nnoremap = nzz
 nnoremap - Nzz
 
 noremap \ =
-  
-autocmd FileType html,javascript,css set tabstop=2
-autocmd FileType html,javascript,css set shiftwidth=2
-autocmd FileType html,javascript,css set softtabstop=2
 
 " 光标移动
 noremap i k
@@ -63,14 +59,12 @@ nnoremap <silent> dl dw
 " 删除当前行
 nnoremap dr dd
 
-
 " 删除并进入插入模式
 nnoremap cw ciw
 nnoremap c" ci"
 nnoremap c( ci(
 nnoremap c{ ci{
 nnoremap cl cw
-
 
 " 加载vim的配置文件
 nnoremap R :source $MYVIMRC<CR>
