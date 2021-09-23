@@ -10,7 +10,7 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'kevinoid/vim-jsonc'
 Plug 'mhinz/vim-startify'
-Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
+" Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
 Plug 'honza/vim-snippets'
 Plug 'Yggdroot/indentLine'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -26,4 +26,9 @@ Plug 'TaDaa/vimade'
 Plug 'gcmt/wildfire.vim' 
 Plug 'ryanoasis/vim-devicons'
 Plug 'voldikss/vim-translator'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'christianchiarulli/nvcode-color-schemes.vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 call plug#end()

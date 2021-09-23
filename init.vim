@@ -12,6 +12,9 @@ source ~/.config/nvim/plugin/plug-setting/vim-markdown.vim
 source ~/.config/nvim/plugin/plug-setting/vimtex.vim
 source ~/.config/nvim/plugin/plug-setting/vim-nerd-font.vim
 source ~/.config/nvim/plugin/plug-setting/vim-translator.vim
+source ~/.config/nvim/plugin/plug-setting/telescope.vim
+source ~/.config/nvim/plugin/plug-setting/treesitter.vim
+source ~/.config/nvim/plugin/plug-setting/nvcode-color-schemes.vim
 
 source ~/.config/nvim/general/settings.vim
 source ~/.config/nvim/general/filetype.vim
