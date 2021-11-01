@@ -16,14 +16,11 @@ noremap \ =
 " 光标移动
 noremap i k
 noremap k j
-noremap j b
-noremap l e
+noremap j h
 noremap m i
 noremap M I
 noremap I 4k
 noremap K 4j
-noremap J h
-noremap L l
 " 复制内容到系统剪切板
 noremap Y "+y
 " 全选
@@ -56,15 +53,13 @@ nnoremap <silent> d" di"
 nnoremap <silent> d( di(
 nnoremap <silent> d{ di{
 nnoremap <silent> dl dw
-" 删除当前行
-nnoremap dr dd
 
 " 删除并进入插入模式
-nnoremap cw ciw
-nnoremap c" ci"
-nnoremap c( ci(
-nnoremap c{ ci{
-nnoremap cl cw
+nnoremap <silent> cw ciw
+nnoremap <silent> c" ci"
+nnoremap <silent> c( ci(
+nnoremap <silent> c{ ci{
+nnoremap <silent> cl cw
 
 " 加载vim的配置文件
 nnoremap R :source $MYVIMRC<CR>
