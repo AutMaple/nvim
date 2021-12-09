@@ -14,11 +14,11 @@ source ~/.config/nvim/plugin/plug-setting/vim-translator.vim
 source ~/.config/nvim/plugin/plug-setting/telescope.vim
 source ~/.config/nvim/plugin/plug-setting/treesitter.vim
 source ~/.config/nvim/plugin/plug-setting/nvcode-color-schemes.vim
+source ~/.config/nvim/plugin/plug-setting/nvim-tree.vim
 
 source ~/.config/nvim/general/settings.vim
 source ~/.config/nvim/general/filetype.vim
 source ~/.config/nvim/mapping/mapping.vim
-
 source ~/.config/nvim/general/myPlug.vim
 
 
