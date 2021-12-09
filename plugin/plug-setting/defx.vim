@@ -64,10 +64,9 @@
 	  \ defx#do_action('change_vim_cwd')
 	endfunction
 
-nnoremap tt :Defx -columns=icons:indent:filename:type<CR>
+nnoremap <silent>tt :Defx -columns=icons:indent:filename:type<CR>
 
 call defx#custom#option('_', {
-        \ 'winwidth': 30,
         \ 'split': 'vertical',
         \ 'direction': 'topleft',
         \ 'show_ignored_files': 0,

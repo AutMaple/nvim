@@ -1,2 +1,2 @@
-set guifont=Hack\ Nerd\ Font\ 11
+set guifont=JetBrainsMono\ Nerd\ Font\ 12
 " let g:airline_powerline_fonts = 1
