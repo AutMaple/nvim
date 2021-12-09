@@ -1,6 +1,8 @@
 {
     "snippets.extends": {
-        "typescript": ["javascript"]
+        "typescript": [
+            "javascript"
+        ]
     },
     "clangd.path": "/home/autmaple/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin/clangd",
     "java.home": "/usr/lib/jvm/java-8-openjdk/",
@@ -8,11 +10,28 @@
         {
             "name": "JavaSE-1.8",
             "path": "/usr/lib/jvm/java-8-openjdk",
-            "default": true 
+            "default": true
         },
         {
             "name": "JavaSE-11",
             "path": "/usr/lib/jvm/java-8-openjdk"
         }
-    ]
+    ],
+    "languageserver": {
+        "golang": {
+            "command": "gopls",
+            "rootPatterns": [
+                "go.mod",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "filetypes": [
+                "go"
+            ],
+            "initializationOptions": {
+                "usePlaceholders": true
+            }
+        }
+    }
 }

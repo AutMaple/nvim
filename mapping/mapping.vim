@@ -88,3 +88,15 @@ noremap <right> :vertical resize +5<CR>
 noremap sv <C-w>t<C-w>H
 noremap sh <C-w>t<C-w>K
 
+" 当前光标在`'`, `"`, `]`, `]`, `}` 之前时
+" 按下 tab 键光标自动跳转到`'`, `"`, `]`, `]`, `}` 的后面
+func SkipPair()  
+    if getline('.')[col('.') - 1] == ')' || getline('.')[col('.') - 1] == ']' || getline('.')[col('.') - 1] == '"' || getline('.')[col('.') - 1] == "'" || getline('.')[col('.') - 1] == '}'  
+        return "\<ESC>la"
+    else  
+        return "\t"  
+    endif  
+endfunc 
+inoremap <TAB> <c-r>=SkipPair()<CR>
+
+

@@ -1,7 +1,6 @@
 source ~/.config/nvim/plugin/plugin.vim
 source ~/.config/nvim/plugin/plug-setting/coc.vim
 source ~/.config/nvim/plugin/plug-setting/my-plug.vim
-source ~/.config/nvim/plugin/plug-setting/NerdTree.vim
 source ~/.config/nvim/plugin/plug-setting/markdown-preview.vim
 source ~/.config/nvim/plugin/plug-setting/easy-align.vim
 source ~/.config/nvim/plugin/plug-setting/Leaderf.vim
@@ -20,6 +19,7 @@ source ~/.config/nvim/general/settings.vim
 source ~/.config/nvim/general/filetype.vim
 source ~/.config/nvim/mapping/mapping.vim
 
+source ~/.config/nvim/general/myPlug.vim
 
 
 

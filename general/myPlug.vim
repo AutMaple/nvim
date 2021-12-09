@@ -13,7 +13,6 @@ function! JumpToPairs()
     let curPos = col(".")
     let chars = getline(".")
     let curChar = chars[curPos - 1]
-    echom curChar
     if curChar == "\'" || curChar == "\"" || curChar == ")" || curChar == "]" || curChar == "}"
         return "\<Esc>la"
     else
