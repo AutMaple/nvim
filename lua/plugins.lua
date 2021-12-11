@@ -64,5 +64,7 @@ return require("packer").startup(
     use "Yggdroot/indentLine"
 
     use "mhartington/formatter.nvim"
+
+    use "windwp/nvim-autopairs"
   end
 )

@@ -16,4 +16,4 @@ require("plugin.galaxyline")
 require("plugin.nerdcomment")
 require("plugin.colorizer")
 require("plugin.formatter")
-
+require("plugin.autopairs")
