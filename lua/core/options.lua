@@ -6,14 +6,14 @@ local function load_options()
     ignorecase = true, -- 忽略大小写
     smartcase = true,
     background = "dark",
-    termguicolors = true
+    termguicolors = true,
+    scrolloff = 7
   }
   local window_local = {
     number = true,
     relativenumber = true,
     cursorline = true,
     wrap = false,
-    scrolloff = 7,
     foldmethod = "manual"
   }
   local buffer_local = {

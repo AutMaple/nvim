@@ -31,11 +31,16 @@ return require("packer").startup(
       run = ":TSUpdate"
     }
 
+    -- lsp and completion
     use "neovim/nvim-lspconfig" -- Collection of configurations for built-in LSP client
-    use "hrsh7th/nvim-cmp" -- Autocompletion plugin
     use "hrsh7th/cmp-nvim-lsp" -- LSP source for nvim-cmp
-    use "saadparwaiz1/cmp_luasnip" -- Snippets source for nvim-cmp
-    use "L3MON4D3/LuaSnip" -- Snippets plugin
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-path"
+    use "hrsh7th/cmp-cmdline"
+    use "hrsh7th/nvim-cmp"
+    use "hrsh7th/cmp-vsnip"
+    use "hrsh7th/vim-vsnip"
+    use "onsails/lspkind-nvim" -- icon
 
     use "christianchiarulli/nvcode-color-schemes.vim"
 
@@ -66,5 +71,9 @@ return require("packer").startup(
     use "mhartington/formatter.nvim"
 
     use "windwp/nvim-autopairs"
+
+    use "nvim-treesitter/nvim-treesitter-refactor"
+
+    use "romgrk/nvim-treesitter-context"
   end
 )

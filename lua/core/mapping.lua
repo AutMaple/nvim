@@ -2,6 +2,7 @@ local key_map = vim.api.nvim_set_keymap
 
 local noremap = {noremap = true}
 local nore_silent = {noremap = true, silent = true}
+local expr = {expr = true}
 
 local function inject_map()
   local mapping = {
@@ -48,7 +49,7 @@ local function inject_map()
     -- 在高亮字符串中移动并将光标移动到屏幕中间
     {"n", "=", "nzz", noremap},
     {"n", "-", "Nzz", noremap},
-    -- { "", "\", "=", noremap },
+    {"", "\\", "=", noremap},
     {"", ";", ":", noremap},
     -- 分屏操作
     {"", "sl", ":set splitright<CR>:vsplit<CR>", nore_silent},
@@ -82,10 +83,22 @@ local function inject_map()
     {"n", "<A-j>", ":BufferLineCyclePrev<CR>", nore_silent},
     {"n", "<C-l>", ":BufferLineMoveNext<CR>", nore_silent},
     {"n", "<C-j>", ":BufferLineMovePrev<CR>", nore_silent},
+    {"n", "<leader>w", ":bd<CR>", nore_silent},
     -- Plug formatter
-    {"n", "<A-F>", ":Format<CR>", nore_silent}
-  }
+    {"n", "<A-F>", ":Format<CR>", nore_silent},
+    -- Plug vsnip
+    -- NOTE: You can use other key to expand snippet.
 
+    -- Jump forward or backward
+    {"i", "<A-k>", "vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'", expr},
+    {"s", "<A-k>", "vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'", expr},
+    {"i", "<A-i>", "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'", expr},
+    {"s", "<A-i>", "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'", expr},
+    {"n", "s", "<Plug>(vsnip-select-text)", {}},
+    {"x", "s", "<Plug>(vsnip-select-text)", {}},
+    {"n", "S", "<Plug>(vsnip-cut-text)", {}},
+    {"x", "S", "<Plug>(vsnip-cut-text)", {}}
+  }
   for _, value in pairs(mapping) do
     key_map(value[1], value[2], value[3], value[4])
   end
