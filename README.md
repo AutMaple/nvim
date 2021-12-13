@@ -7,3 +7,8 @@ My settings for neovim
 ```shell
 git clone git@github.com:AutMaple/nvim.git ~/.config/nvim
 ```
+
+## rejk
+
+fsjkfsl
+

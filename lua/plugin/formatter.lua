@@ -49,6 +49,35 @@ formatter.setup(
             stdin = true
           }
         end
+      },
+      javascript = {
+        -- prettier
+        function()
+          return {
+            exe = "js-beautify",
+            args = {"--file", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+            stdin = true
+          }
+        end
+      },
+      markdown = {
+        -- markdown-format
+        function()
+          return {
+            exe = "markdown-format",
+            args = {"--file", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+            stdin = true
+          }
+        end
+      },
+      go = {
+        function()
+          return {
+            exe = "gofmt",
+            args = {"-w", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+            stdin = false
+          }
+        end
       }
     }
   }
@@ -59,7 +88,7 @@ vim.api.nvim_exec(
   [[
       augroup FormatAutogroup
       	autocmd!
-				autocmd BufWritePost *.rs,*.lua,*.py,*.cpp,*.c FormatWrite
+				autocmd BufWritePost *.rs,*.lua,*.py,*.cpp,*.c,*.js,*.md,*.go FormatWrite
       augroup END
   ]],
   true

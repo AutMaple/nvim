@@ -52,19 +52,11 @@ cmp.setup(
       end
     },
     snippet = {
-      -- REQUIRED - you must specify a snippet engine
       expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-        -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
+        require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
       end
     },
     mapping = {
-      ["<C-n>"] = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Insert}),
-      ["<C-p>"] = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Insert}),
-      ["<Down>"] = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}),
-      ["<Up>"] = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}),
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), {"i", "c"}),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), {"i", "c"}),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
@@ -78,7 +70,6 @@ cmp.setup(
       -- Accept currently selected item. If none selected, `select` first item.
       -- Set `select` to `false` to only confirm explicitly selected items.
       ["<CR>"] = cmp.mapping.confirm({select = true}),
-      -- Intellij-like mapping
       ["<Tab>"] = cmp.mapping(
         function(fallback)
           -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
@@ -98,10 +89,7 @@ cmp.setup(
     sources = cmp.config.sources(
       {
         {name = "nvim_lsp"},
-        {name = "vsnip"} -- For vsnip users.
-        -- { name = 'luasnip' }, -- For luasnip users.
-        -- { name = 'ultisnips' }, -- For ultisnips users.
-        -- { name = 'snippy' }, -- For snippy users.
+        {name = "luasnip"} -- For luasnip users.
       },
       {
         {name = "buffer"}
@@ -137,9 +125,6 @@ cmp.setup.cmdline(
 
 local lspconfig = require("lspconfig")
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
--- local on_attach = function(client, bufnr)
 local on_attach = function(bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -179,10 +164,9 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = {"clangd", "rust_analyzer", "pyright", "tsserver"}
+local servers = {"clangd", "rust_analyzer", "pyright", "tsserver", "gopls"}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
-    -- on_attach = my_custom_on_attach,
     capabilities = capabilities,
     on_attach = on_attach,
     flags = {
@@ -208,4 +192,31 @@ lspconfig.sumneko_lua.setup {
       }
     }
   }
+}
+
+lspconfig.tsserver.setup {
+  cmd = {
+    "typescript-language-server",
+    "--stdio"
+  },
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx"
+  },
+  init_options = {
+    hostInfo = "neovim"
+  },
+  root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+  single_file_support = true
+}
+
+lspconfig.gopls.setup {
+  cmd = {"gopls"},
+  filetypes = {"go", "gomod"},
+  root_dir = lspconfig.util.root_pattern("go.mod", ".git"),
+  single_file_support = true
 }

@@ -38,9 +38,11 @@ return require("packer").startup(
     use "hrsh7th/cmp-path"
     use "hrsh7th/cmp-cmdline"
     use "hrsh7th/nvim-cmp"
-    use "hrsh7th/cmp-vsnip"
-    use "hrsh7th/vim-vsnip"
     use "onsails/lspkind-nvim" -- icon
+    -- use "hrsh7th/cmp-vsnip"
+    -- use "hrsh7th/vim-vsnip"
+    use "L3MON4D3/LuaSnip"
+    use "saadparwaiz1/cmp_luasnip"
 
     use "christianchiarulli/nvcode-color-schemes.vim"
 
@@ -75,5 +77,9 @@ return require("packer").startup(
     use "nvim-treesitter/nvim-treesitter-refactor"
 
     use "romgrk/nvim-treesitter-context"
+
+    use "mg979/vim-visual-multi"
+
+    use "iamcco/markdown-preview.nvim"
   end
 )

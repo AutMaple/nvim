@@ -86,18 +86,11 @@ local function inject_map()
     {"n", "<leader>w", ":bd<CR>", nore_silent},
     -- Plug formatter
     {"n", "<A-F>", ":Format<CR>", nore_silent},
-    -- Plug vsnip
-    -- NOTE: You can use other key to expand snippet.
-
-    -- Jump forward or backward
-    {"i", "<A-k>", "vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'", expr},
-    {"s", "<A-k>", "vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'", expr},
-    {"i", "<A-i>", "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'", expr},
-    {"s", "<A-i>", "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'", expr},
-    {"n", "s", "<Plug>(vsnip-select-text)", {}},
-    {"x", "s", "<Plug>(vsnip-select-text)", {}},
-    {"n", "S", "<Plug>(vsnip-cut-text)", {}},
-    {"x", "S", "<Plug>(vsnip-cut-text)", {}}
+    -- Plug markdown-preview
+    {"n", "tp", "<Plug>MarkdownPreviewToggle", {}},
+    -- Plug luasnip
+    {"s", "<A-l>", "<cmd>lua require('luasnip').jump(1)<CR>", nore_silent},
+    {"s", "<A-j>", "<cmd>lua require('luasnip').jump(-1)<CR>", nore_silent}
   }
   for _, value in pairs(mapping) do
     key_map(value[1], value[2], value[3], value[4])
