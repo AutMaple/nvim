@@ -87,10 +87,7 @@ local function inject_map()
     -- Plug formatter
     {"n", "<A-F>", ":Format<CR>", nore_silent},
     -- Plug markdown-preview
-    {"n", "tp", "<Plug>MarkdownPreviewToggle", {}},
-    -- Plug luasnip
-    {"s", "<A-l>", "<cmd>lua require('luasnip').jump(1)<CR>", nore_silent},
-    {"s", "<A-j>", "<cmd>lua require('luasnip').jump(-1)<CR>", nore_silent}
+    {"n", "tp", "<Plug>MarkdownPreviewToggle", {}}
   }
   for _, value in pairs(mapping) do
     key_map(value[1], value[2], value[3], value[4])

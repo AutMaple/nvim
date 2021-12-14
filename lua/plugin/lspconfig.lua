@@ -1,6 +1,5 @@
 -- set completeopt=menu,menuone,noselect
 vim.g.completeopt = "menu,menuone,noselect"
-
 -- Setup nvim-cmp.
 local cmp = require "cmp"
 
@@ -33,6 +32,15 @@ local kind_icons = {
   TypeParameter = ""
 }
 
+local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
+
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+vim.g.UltiSnipsJumpForwardTrigger = "<A-k>"
+vim.g.UltiSnipsJumpBackwardTrigger = "<A-i>"
+
 cmp.setup(
   {
     formatting = {
@@ -45,6 +53,7 @@ cmp.setup(
           buffer = "[Buffer]",
           nvim_lsp = "[LSP]",
           luasnip = "[LuaSnip]",
+          ultisnips = "[UltiSnips]",
           nvim_lua = "[Lua]",
           latex_symbols = "[LaTeX]"
         })[entry.source.name]
@@ -53,43 +62,60 @@ cmp.setup(
     },
     snippet = {
       expand = function(args)
-        require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+        vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end
     },
     mapping = {
+      -- i ==> insert mode
+      -- c ==> commad mode
+      -- s ==> select mode
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), {"i", "c"}),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), {"i", "c"}),
+      -- open code prompt box
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
-      ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-      ["<C-e>"] = cmp.mapping(
-        {
-          i = cmp.mapping.abort(),
-          c = cmp.mapping.close()
-        }
-      ),
-      -- Accept currently selected item. If none selected, `select` first item.
-      -- Set `select` to `false` to only confirm explicitly selected items.
+      ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}), {"i", "c"}),
+      ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}), {"i", "c"}),
       ["<CR>"] = cmp.mapping.confirm({select = true}),
       ["<Tab>"] = cmp.mapping(
-        function(fallback)
-          -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
-          if cmp.visible() then
-            local entry = cmp.get_selected_entry()
-            if not entry then
-              cmp.select_next_item({behavior = cmp.SelectBehavior.Select})
+        {
+          c = function(fallback)
+            vim.cmd(":echom 'command hello'")
+            if cmp.visible() then
+              local entry = cmp.get_selected_entry()
+              if not entry then
+                cmp.select_next_item({behavior = cmp.SelectBehavior.Select})
+              end
+              cmp.confirm()
+            else
+              fallback()
             end
-            cmp.confirm()
-          else
-            fallback()
+          end,
+          i = function(fallback)
+            vim.cmd(":echom 'insert hello'")
+            if cmp.visible() and vim.fn["UltiSnips#CanJumpForwards"]() == 0 then
+              local entry = cmp.get_selected_entry()
+              if not entry then
+                cmp.select_next_item({behavior = cmp.SelectBehavior.Select})
+              end
+              cmp.confirm()
+            else
+              cmp_ultisnips_mappings.compose({"jump_forwards"})(fallback)
+            end
+          end,
+          s = function(fallback)
+            if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+              vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), "m", true)
+            else
+              fallback()
+            end
           end
-        end,
-        {"i", "s", "c"}
+        }
       )
     },
     sources = cmp.config.sources(
       {
         {name = "nvim_lsp"},
-        {name = "luasnip"} -- For luasnip users.
+        {name = "ultisnips"} -- For ultisnip users.
       },
       {
         {name = "buffer"}
@@ -102,16 +128,15 @@ cmp.setup(
 cmp.setup.cmdline(
   "/",
   {
-    sources = {
-      {name = "buffer"}
-    }
+    completion = {autocomplete = false},
+    sources = {{name = "buffer"}}
   }
 )
-
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(
   ":",
   {
+    completion = {autocomplete = false},
     sources = cmp.config.sources(
       {
         {name = "path"}

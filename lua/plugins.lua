@@ -32,19 +32,28 @@ return require("packer").startup(
     }
 
     -- lsp and completion
-    use "neovim/nvim-lspconfig" -- Collection of configurations for built-in LSP client
     use "hrsh7th/cmp-nvim-lsp" -- LSP source for nvim-cmp
     use "hrsh7th/cmp-buffer"
     use "hrsh7th/cmp-path"
     use "hrsh7th/cmp-cmdline"
     use "hrsh7th/nvim-cmp"
     use "onsails/lspkind-nvim" -- icon
-    -- use "hrsh7th/cmp-vsnip"
-    -- use "hrsh7th/vim-vsnip"
-    use "L3MON4D3/LuaSnip"
-    use "saadparwaiz1/cmp_luasnip"
-
+    use(
+      {
+        "SirVer/ultisnips",
+        config = function()
+          vim.g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
+          vim.g.UltiSnipsJumpForwardTrigger = "<Plug>(ultisnips_jump_forward)"
+          vim.g.UltiSnipsJumpBackwardTrigger = "<Plug>(ultisnips_jump_backward)"
+          vim.g.UltiSnipsListSnippets = "<c-x><c-s>"
+          vim.g.UltiSnipsRemoveSelectModeMapping = 0
+        end
+      }
+    )
+    use "honza/vim-snippets"
+    use "quangnguyen30192/cmp-nvim-ultisnips"
     use "christianchiarulli/nvcode-color-schemes.vim"
+    use "neovim/nvim-lspconfig" -- Collection of configurations for built-in LSP client
 
     -- buffer
     use {"akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons"}
@@ -53,9 +62,6 @@ return require("packer").startup(
     use {
       "glepnir/galaxyline.nvim",
       branch = "main",
-      -- your statusline
-      -- config = function() require'my_statusline' end,
-      -- some optional icons
       requires = {"kyazdani42/nvim-web-devicons", opt = true}
     }
 
