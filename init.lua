@@ -20,6 +20,7 @@ require("plugin.autopairs")
 require("plugin.markdownpreview")
 
 --using lua inspect the content of Object
+-- used to test
 function _G.put(...)
   local objects = {}
   for i = 1, select("#", ...) do
