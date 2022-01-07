@@ -2,6 +2,7 @@
 vim.g.completeopt = "menu,menuone,noselect"
 -- Setup nvim-cmp.
 local cmp = require "cmp"
+local util = require "lspconfig.util"
 
 -- default icons of tip item
 local kind_icons = {
@@ -189,7 +190,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = {"clangd", "rust_analyzer", "pyright", "tsserver", "gopls"}
+local servers = {"clangd", "rust_analyzer", "tsserver", "gopls", "sumneko_lua", "tsserver", "pylsp"} -- "pyright",
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     capabilities = capabilities,
@@ -243,5 +244,21 @@ lspconfig.gopls.setup {
   cmd = {"gopls"},
   filetypes = {"go", "gomod"},
   root_dir = lspconfig.util.root_pattern("go.mod", ".git"),
+  single_file_support = true
+}
+
+lspconfig.pylsp.setup {
+  cmd = {"pylsp"},
+  filetypes = {"python"},
+  root_dir = function(fname)
+    local root_files = {
+      "pyproject.toml",
+      "setup.py",
+      "setup.cfg",
+      "requirements.txt",
+      "Pipfile"
+    }
+    return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+  end,
   single_file_support = true
 }
