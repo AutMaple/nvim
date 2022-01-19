@@ -7,15 +7,15 @@ local expr = {expr = true}
 local function inject_map()
   local mapping = {
     -- 光标移动
-    {"", "i", "k", noremap},
-    {"", "k", "j", noremap},
-    {"", "j", "h", noremap},
-    {"", "m", "i", noremap},
-    {"", "M", "I", noremap},
-    {"", "K", "4j", noremap},
-    {"", "I", "4k", noremap},
+    -- {"", "i", "k", noremap},
+    -- {"", "k", "j", noremap},
+    -- {"", "j", "h", noremap},
+    -- {"", "m", "i", noremap},
+    -- {"", "M", "I", noremap},
+    -- {"", "K", "4j", noremap},
+    -- {"", "I", "4k", noremap},
     {"", "gl", "$", noremap},
-    {"", "gj", "^", noremap},
+    {"", "gh", "^", noremap},
     -- 复制粘贴
     {"", "Y", '"+y', nore_silent},
     {"n", "yw", "yiw", nore_silent},
@@ -53,16 +53,16 @@ local function inject_map()
     {"", ";", ":", noremap},
     -- 分屏操作
     {"", "sl", ":set splitright<CR>:vsplit<CR>", nore_silent},
-    {"", "sj", ":set nosplitright<CR>:vsplit<CR>", nore_silent},
-    {"", "si", ":set nosplitbelow<CR>:split<CR>", nore_silent},
-    {"", "sk", ":set splitbelow<CR>:split<CR>", nore_silent},
+    {"", "sh", ":set nosplitright<CR>:vsplit<CR>", nore_silent},
+    {"", "sk", ":set nosplitbelow<CR>:split<CR>", nore_silent},
+    {"", "sj", ":set splitbelow<CR>:split<CR>", nore_silent},
     -- 水平分屏和垂直分屏的切换
     {"", "sv", "<C-w>t<C-w>H", nore_silent},
     {"", "sh", "<C-w>t<C-w>K", nore_silent},
     -- 分屏之间的切换
-    {"", "<Leader>i", "<C-w>k", nore_silent},
-    {"", "<Leader>k", "<C-w>j", nore_silent},
-    {"", "<Leader>j", "<C-w>h", nore_silent},
+    {"", "<Leader>k", "<C-w>k", nore_silent},
+    {"", "<Leader>j", "<C-w>j", nore_silent},
+    {"", "<Leader>h", "<C-w>h", nore_silent},
     {"", "<Leader>l", "<C-w>l", nore_silent},
     -- 控制分屏的大小
     {"", "<up>", ":res +5<CR>", nore_silent},
