@@ -102,7 +102,7 @@ require "nvim-tree".setup {
         {key = "<C-l>", cb = tree_cb("vsplit")},
         {key = "<C-k>", cb = tree_cb("split")},
         {key = "<C-t>", cb = tree_cb("tabnew")},
-        {key = "j", cb = tree_cb("close_node")}
+        {key = "h", cb = tree_cb("close_node")}
       }
     },
     number = true,
