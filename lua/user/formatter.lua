@@ -11,9 +11,9 @@ formatter.setup(
         --luafmt
         function()
           return {
-            exe = "luafmt",
-            args = {"--indent-count", 2, "--stdin"},
-            stdin = true
+            exe = "stylua",
+            --args = {"--indent-count", 2, "--stdin"},
+            --stdin = true
           }
         end
       },

@@ -29,6 +29,10 @@ lsp_installer.on_server_ready(
       opts = vim.tbl_deep_extend("force", tsserver, opts)
     end
 
+    if server.name == "csharp_ls" then
+      local csharp_ls = require("user.lsp.settings.csharp_ls")
+      opts = vim.tbl_deep_extend("force", csharp_ls, opts)
+    end
     -- This setup() function is exactly the same as lspconfig's setup function.
     -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
     server:setup(opts)
